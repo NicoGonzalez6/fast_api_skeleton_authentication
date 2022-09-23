@@ -7,6 +7,11 @@ from utils import bcrypt
 
 
 class User_Service():
+
+    #
+    # @Create User
+    #
+
     def create(request: user_schema.User, db: Session):
         hashed_password = bcrypt.Hash.hash_password(request.password)
         new_user = models.User(
@@ -15,6 +20,9 @@ class User_Service():
         db.commit()
         db.refresh(new_user)
         return new_user
+    #
+    # @Get Single User
+    #
 
     def get_user(id: int, db: Session):
         user = db.query(models.User).filter(models.User.id == id).first()

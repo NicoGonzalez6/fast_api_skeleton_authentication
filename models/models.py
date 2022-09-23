@@ -1,5 +1,3 @@
-from enum import unique
-from pickle import TRUE
 from config.db import Base
 from sqlalchemy import Column,  Integer, String
 from sqlalchemy import UniqueConstraint

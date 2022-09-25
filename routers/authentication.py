@@ -24,6 +24,6 @@ def Login_User(request:  OAuth2PasswordRequestForm = Depends(), db: Session = De
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid credentials")
     access_token = token.Token.create_access_token(
-        data={"sub": user.email}
+        data={"sub": user.email, "id": user.id, "role": user.role}
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": {"email": user.email, "name": user.name, "role": user.role}}

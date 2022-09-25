@@ -9,3 +9,5 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: str
+    id: int
+    role: str

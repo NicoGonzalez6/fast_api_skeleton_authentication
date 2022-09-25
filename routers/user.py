@@ -4,6 +4,7 @@ from config.db import get_db
 from services.user_services import User_Service
 from schemas import user_schema
 from utils import validations, oauth2
+from schemas.game_news_schema import Response_User_Game_news
 
 router = APIRouter(
     prefix="/Users",
@@ -20,6 +21,6 @@ def CREATE_USER(request: user_schema.User, db: Session = Depends(get_db)):
     return User_Service.create(request, db)
 
 
-@router.get('/{id}', status_code=status.HTTP_200_OK, response_model=user_schema.Response_User)
-def GET_USER(id, db: Session = Depends(get_db), current_user: user_schema.User = Depends(oauth2.get_current_user)):
+@router.get('/{id}', status_code=status.HTTP_200_OK, response_model=Response_User_Game_news)
+def GET_USER(id: int, db: Session = Depends(get_db), current_user: user_schema.User = Depends(oauth2.get_current_user)):
     return User_Service.get_user(id, db)

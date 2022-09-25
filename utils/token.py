@@ -21,8 +21,12 @@ class Token():
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             email: str = payload.get("sub")
+            id: int = payload.get("id")
+            role: int = payload.get("role")
             if email is None:
                 raise credentials_exception
-            token_data = token_schema.TokenData(email=email)
+            token_data = token_schema.TokenData(email=email, id=id, role=role)
+            return {"userId": id, "userRole": role}
+
         except JWTError:
             raise credentials_exception
